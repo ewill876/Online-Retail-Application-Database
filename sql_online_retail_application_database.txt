@@ -1,0 +1,87 @@
+CREATE TABLE customer(
+customer_id INT PRIMARY KEY,
+custfirstname VARCHAR(40),
+custlastname VARCHAR (40),
+custstreetaddress VARCHAR (40),
+custcity VARCHAR (40),
+custstate VARCHAR (40),
+custzipcode VARCHAR (40),
+custareacode VARCHAR (40),
+custphonenumber VARCHAR (40)
+);
+
+SELECT * 
+FROM customer;
+
+DROP TABLE customer;
+
+INSERT INTO customer VALUES (1, 'Jane', 'Dillard', 'Rosemary Street', 'Miami', 'Florida', '00001', '139', 1234567891 );
+INSERT INTO customer VALUES (2, 'James', 'Saunders', 'Blossom Street', 'Washington', 'District of Columbia', '00002', '263', 8734567891 );
+INSERT INTO customer VALUES (3, 'Michael', 'Richardson', 'Pepper Boulevard', 'Atlanta', 'Georgia', '00003', '394', 3534585643);
+INSERT INTO customer VALUES (4, 'Mandy', 'Scott', 'Buttercup Valley', 'Chicago', 'Illiois', '00004', '475', 5478567891 );
+INSERT INTO customer VALUES (5, 'Lisa', 'Henry', 'Premier Road', 'Houston', 'Texas', '00005', '514', 6135485642 );
+
+CREATE TABLE orders (
+    orderid INT PRIMARY KEY,
+    orderdate DATE,
+    shipdate DATE,
+    customerid INT,
+    employeeid INT
+
+);
+
+SELECT * 
+FROM orders;
+
+DROP TABLE orders;
+
+INSERT INTO orders VALUES (11, '2022-05-01', '2022-05-03', 1, 01);
+INSERT INTO orders VALUES (22, '2022-06-05', '2022-06-07', 2, 02);
+INSERT INTO orders VALUES (33, '2022-07-08', '2022-07-10', 3, 03);
+INSERT INTO orders VALUES (44, '2022-08-03', '2022-08-05', 4, 04);
+INSERT INTO orders VALUES (55, '2022-09-02', '2022-09-07', 5, 05);
+
+CREATE TABLE lineitems (
+    orderid INT,
+    productid INT PRIMARY KEY,
+    quotedprice INT,
+    quantityordered INT,
+    FOREIGN KEY (orderid) REFERENCES orders (orderid) ON DELETE SET NULL
+    );
+
+SELECT *
+FROM lineitems;
+
+DROP TABLE lineitems;
+
+INSERT INTO lineitems VALUES (11, 87371, 240, 10);
+INSERT INTO lineitems VALUES (11, 82645, 850, 22);
+INSERT INTO lineitems VALUES (33, 64688, 630, 13);
+INSERT INTO lineitems VALUES (44, 74785, 770, 15);
+INSERT INTO lineitems VALUES (55, 83638, 950, 21);
+
+
+CREATE TABLE products (
+productid INT PRIMARY KEY,
+productname VARCHAR (40),
+productdescription VARCHAR (40),
+retailprice INT,
+quantityonhand INT,
+categoryid INT
+);
+
+SELECT *
+FROM products;
+
+DROP TABLE products;
+
+
+INSERT INTO products VALUES (87371, 'nikon', 'camera', 210, 10,23);
+INSERT INTO products VALUES (82645, 'canon', 'camera', 845, 22,58);
+INSERT INTO products VALUES (64688, 'hp', 'desktop', 630, 13,71);
+INSERT INTO products VALUES (74785, 'dell', 'desktop', 780, 15,64);
+INSERT INTO products VALUES (83638, 'telsa', 'phone', 999, 21,87);
+
+SELECT * FROM products
+WHERE retailprice >= 780;
+
